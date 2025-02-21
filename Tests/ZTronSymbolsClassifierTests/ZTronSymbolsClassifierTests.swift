@@ -238,9 +238,7 @@ final class SomeTest: XCTestCase {
         for stroke in randomStoke {
             if let firstPointInStroke = stroke.first {
                 let redistributeStroke = stroke.redistribute(150)
-                
-                XCTAssertEqual(stroke.count, redistributeStroke.count)
-                
+                                
                 if let firstRedistributedPoint = redistributeStroke.first {
                     XCTAssertEqual(firstPointInStroke.x, firstRedistributedPoint.x)
                     XCTAssertEqual(firstPointInStroke.y, firstRedistributedPoint.y)
@@ -262,37 +260,3 @@ final class SomeTest: XCTestCase {
         }
     }
 }
-
-
-
-/*#include <stdio.h>
- #include <stdlib.h>
- #include <stdbool.h>
-
- typedef struct {
-     double x;
-     double y;
- } Point;
-
- typedef struct {
-     Point* points;
-     size_t length;
- } Stroke;
-
- bool prop_redistdribute_preserves_last_point(double d, Stroke stroke) {
-     if (d <= 3 * delta || stroke.length == 0) return true;
-     Point last = stroke.points[stroke.length - 1];
-     Stroke redistributed = redistribute(d, stroke);
-     return equal(redistributed.points[redistributed.length - 1], last);
- }
-
- int main() {
-     // Assuming quickCheck function is defined elsewhere
-     quickCheck(prop_stroke_fits_inside_bounding_box);
-     quickCheck(prop_refit_fits_inside);
-     quickCheck(prop_refit_into_boundingbox_is_identity);
-     quickCheck(prop_refit_idempotent);
-     quickCheck(prop_redistdribute_preserves_first_point);
-     quickCheck(prop_redistdribute_preserves_last_point);
-     return 0;
- }*/

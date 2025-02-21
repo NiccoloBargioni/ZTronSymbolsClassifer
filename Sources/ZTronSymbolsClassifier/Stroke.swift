@@ -62,37 +62,90 @@ extension Stroke {
         return zip(self, self.dropFirst()).reduce(0) { $0 + $1.0.euclideanDistance(to: $1.1) }
     }
     
+    
+    /*
+     Stroke redistribute(double dist, Stroke stroke) {
+         if (dist <= 0) {
+             fprintf(stderr, "No redistribution with non-positive distance!\n");
+             exit(EXIT_FAILURE);
+         }
+
+         Stroke result;
+         result.points = (Point*)malloc(stroke.size * sizeof(Point));
+         result.size = 1;
+         result.points[0] = stroke.points[0];
+
+         double left = dist;
+         size_t index = 1;
+
+         while (index < stroke.size) {
+             Point prev = result.points[result.size - 1];
+             Point next = stroke.points[index];
+             double d = euclideanDistance(prev, next);
+
+             if (d < left) {
+                 left -= d;
+                 index++;
+             } else {
+                 double ratio = left / d;
+                 Point ins = add(prev, scalar(ratio, sub(next, prev)));
+                 result.points[result.size] = ins;
+                 result.size++;
+                 left = dist;
+             }
+         }
+
+         return result;
+     }*/
+    func redistribute(distance: Double) -> Stroke {
+        guard distance > 0 else { return [] }
+        guard self.count > 1 else { return self }
+        guard let firstPoint = self.first else { return [] }
+        
+        var index = 1
+        var result = Stroke.init(arrayLiteral: firstPoint)
+        
+        var left = distance
+        
+        while index < self.count {
+            if let previousPoint = result.last {
+                let nextPoint = self[index]
+                let consecutivePointsDistance = previousPoint.euclideanDistance(to: nextPoint)
+                
+                if consecutivePointsDistance < left {
+                    left -= consecutivePointsDistance
+                    index += 1
+                } else {
+                    let ratio = left / consecutivePointsDistance
+                    let adjustedNextPoint = previousPoint + ratio * (nextPoint - previousPoint)
+                    result.append(adjustedNextPoint)
+                    left = distance
+                }
+
+            }
+        }
+        
+        if let lastPoint = self.last {
+            result.append(lastPoint)
+        }
+        
+        return result
+    }
+    
     /// Redistribute the points along the stroke using linear interpolation to ensure that it's made of `num` points, approximately evenly spaced.
     ///
     /// - Complexity: O(self.count)
     func redistribute(_ num: Int) -> Stroke {
-        guard num > 0 else { return [] }
+        guard num > 0, self.count > 0 else { return [] }
         
-        guard self.count > 1 else { return self }
-        let totalLength = self.strokeLength()
-        let segmentLength = totalLength / Double(num - 1)
-        
-        var newStroke: Stroke = [self.first!]
-        var remainingLength = segmentLength
-        var index = 1
-        
-        while index < self.count {
-            let prev = newStroke.last!
-            let next = self[index]
-            let dist = prev.euclideanDistance(to: next)
-            
-            if dist < remainingLength {
-                remainingLength -= dist
-                index += 1
-            } else {
-                let ratio = remainingLength / dist
-                let newPoint = prev + ratio * (next - prev)
-                newStroke.append(newPoint)
-                remainingLength = segmentLength
+        if num == 1 {
+            if let first = self.first {
+                return [first]
             }
         }
         
-        return newStroke
+        let dist = self.strokeLength() / Double(num - 1)
+        return self.redistribute(distance: dist)
     }
     
     /// fit the first rect maximally and centered into the second rect keeping the aspect ratio
@@ -178,31 +231,26 @@ extension Stroke {
         return acos(fixDomain(value: dotProduct / normProduct))
     }
     
-    func dominant(_ alpha: Double, _ s: Stroke) -> Stroke {
-        var result = s
+    func dominant(_ alpha: Double, _ stroke: Stroke) -> Stroke {
+        guard stroke.count > 2 else { return stroke }
         
-        if result.count >= 3 {
-            func dominantRec(_ alpha: Double, _ ps: Stroke) -> Stroke {
-                if ps.count < 3 { return ps }
-                
-                let x = ps[0]
-                let y = ps[1]
-                let z = ps[2]
-                
-                if angle(x, y, z) < alpha {
-                    var newPs = ps
-                    newPs.remove(at: 1)
-                    return dominantRec(alpha, newPs)
-                } else {
-                    var newPs = ps
-                    newPs.remove(at: 0)
-                    return dominantRec(alpha, newPs)
-                }
-            }
+        var result: Stroke = [stroke[0]]
+        
+        var i = 1
+        while i < stroke.count - 1 {
+            let a = stroke[i - 1]
+            let b = stroke[i]
+            let c = stroke[i + 1]
             
-            result = dominantRec(alpha, result)
+            if angle(a, b, c) < alpha {
+                i += 1
+            } else {
+                result.append(b)
+                i += 1
+            }
         }
         
+        result.append(stroke.last!)
         return result
     }
 

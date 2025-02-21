@@ -32,5 +32,5 @@ extension CGPoint: Sim {
     
     public static func ~~(_ lhs: CGPoint, _ rhs: CGPoint) -> Bool {
         return lhs.euclideanDistance(to: rhs) < Double.EPS
-    }
+    }    
 }
