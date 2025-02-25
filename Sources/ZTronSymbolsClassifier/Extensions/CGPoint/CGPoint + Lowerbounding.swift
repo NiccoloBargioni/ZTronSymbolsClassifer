@@ -87,8 +87,8 @@ public extension Array where Element == CGPoint {
     func grahamConvexHull() -> ConvexHull {
         guard self.count > 4 else { return self }
         
-        var minP = self.minPoint()
-        var sorted = self.sortPoints(relativeTo: minP)
+        let minP = self.minPoint()
+        let sorted = self.sortPoints(relativeTo: minP)
         
         var hull = Self.init()
         
