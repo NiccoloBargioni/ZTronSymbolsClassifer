@@ -1,7 +1,7 @@
 import Foundation
 
-typealias Stroke = [CGPoint]
-typealias Strokes = [Stroke]
+public typealias Stroke = [CGPoint]
+public typealias Strokes = [Stroke]
 
 
 extension Stroke {
@@ -62,41 +62,6 @@ extension Stroke {
         return zip(self, self.dropFirst()).reduce(0) { $0 + $1.0.euclideanDistance(to: $1.1) }
     }
     
-    
-    /*
-     Stroke redistribute(double dist, Stroke stroke) {
-         if (dist <= 0) {
-             fprintf(stderr, "No redistribution with non-positive distance!\n");
-             exit(EXIT_FAILURE);
-         }
-
-         Stroke result;
-         result.points = (Point*)malloc(stroke.size * sizeof(Point));
-         result.size = 1;
-         result.points[0] = stroke.points[0];
-
-         double left = dist;
-         size_t index = 1;
-
-         while (index < stroke.size) {
-             Point prev = result.points[result.size - 1];
-             Point next = stroke.points[index];
-             double d = euclideanDistance(prev, next);
-
-             if (d < left) {
-                 left -= d;
-                 index++;
-             } else {
-                 double ratio = left / d;
-                 Point ins = add(prev, scalar(ratio, sub(next, prev)));
-                 result.points[result.size] = ins;
-                 result.size++;
-                 left = dist;
-             }
-         }
-
-         return result;
-     }*/
     func redistribute(distance: Double) -> Stroke {
         guard distance > 0 else { return [] }
         guard self.count > 1 else { return self }

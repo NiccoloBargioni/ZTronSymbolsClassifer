@@ -2,7 +2,7 @@ import Foundation
 
 protocol Sample {
     func distance(_ a: any Sample, _ b: any Sample) -> Double
-    func distancelb(_ a: any Sample, _ b: any Sample) -> Double
+    func distanceLowerBound(_ a: any Sample, _ b: any Sample) -> Double
 }
 
 struct Hit {

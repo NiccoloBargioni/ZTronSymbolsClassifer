@@ -8,7 +8,7 @@ public class DTW {
     /// - Parameter lhsSequence: The first time sequence.
     /// - Parameter rhsSequence: The second time sequence.
     /// - Parameter measure: This is a function that takes two elements of the input sequences and returns a Double representing the distance between these two elements.
-    public static func greedyDynamicTimeWarping(_ lhsSequence: [Double], _ rhsSequence: [Double], measure: @escaping (Double, Double) -> Double) -> Double {
+    public static func greedyDynamicTimeWarping<T>(_ lhsSequence: [T], _ rhsSequence: [T], measure: @escaping (T, T) -> Double) -> Double {
         guard rhsSequence.count > 0 else {
             return Self.greedyDynamicTimeWarping(rhsSequence, lhsSequence, measure: measure)
         }
@@ -72,7 +72,7 @@ public class DTW {
     /// - Parameter rhsSequence: The second time sequence.
     /// - Parameter windowSize: The window length to compute the DTW over.
     /// - Parameter measure: This is a function that takes two elements of the input sequences and returns a Double representing the distance between these two elements.
-    public static func constrainedDynamicTimeWarping(_ lhsSequence: [Double], _ rhsSequence: [Double], windowSize: Int, measure: @escaping (Double, Double) -> Double) -> Double {
+    public static func constrainedDynamicTimeWarping<T>(_ lhsSequence: [T], _ rhsSequence: [T], windowSize: Int, measure: @escaping (T, T) -> Double) -> Double {
         var costMatrix: [[[Double]]] = .init(repeating: [], count: lhsSequence.count + 1)
         
         for i in 0..<costMatrix.count {
@@ -106,7 +106,7 @@ public class DTW {
     /// - Parameter lhsSequence: The first time sequence.
     /// - Parameter rhsSequence: The second time sequence.
     /// - Parameter measure: This is a function that takes two elements of the input sequences and returns a Double representing the distance between these two elements.
-    public static func unconstrainedDynamicTimeWarping(_ lhsSequence: [Double], _ rhsSequence: [Double], measure: @escaping (Double, Double) -> Double) -> Double {
+    public static func unconstrainedDynamicTimeWarping<T>(_ lhsSequence: [T], _ rhsSequence: [T], measure: @escaping (T, T) -> Double) -> Double {
         var costMatrix: [[Double]] = []
         var pathLengthMatrix: [[Int]] = []
         

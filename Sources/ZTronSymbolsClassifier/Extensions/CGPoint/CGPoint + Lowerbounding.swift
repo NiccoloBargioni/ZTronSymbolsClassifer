@@ -98,4 +98,70 @@ public extension Array where Element == CGPoint {
         
         return hull
     }
+    
+    
+    static func distance(_ lhs: ConvexHull, _ rhs: ConvexHull) -> Double {
+        guard lhs.count > 0 && rhs.count > 0 else { return .infinity }
+        
+        var minDist: Double = .infinity
+        var currentLeftIndex: Int = .zero
+        var currentRightIndex: Int = .zero
+        
+        for k in 0..<lhs.count {
+            if lhs[k].x < lhs[currentLeftIndex].x {
+                currentLeftIndex = k
+            }
+        }
+        
+        for k in 0..<rhs.count {
+            if rhs[k].x > rhs[currentRightIndex].x {
+                currentRightIndex = k
+            }
+        }
+        
+        var iterationsCount: Int = .zero
+        while iterationsCount < lhs.count + rhs.count {
+            let dx = lhs[currentLeftIndex].x - rhs[currentRightIndex].x
+            let dy = lhs[currentLeftIndex].y - rhs[currentRightIndex].y
+            
+            let nextLHSIndex: Int = (currentLeftIndex + 1) % lhs.count
+            let nextRHSIndex: Int = (currentRightIndex + 1) % rhs.count
+
+
+            minDist = Swift.min(minDist, dx*dx + dy*dy)
+            minDist = Swift.min(
+                minDist,
+                CGPoint.pointLineSegmentDistance(
+                    lhs[currentLeftIndex],
+                    theSegmentA: rhs[currentRightIndex],
+                    theSegmentB: rhs[nextRHSIndex]
+                )
+            )
+            minDist = Swift.min(
+                minDist,
+                CGPoint.pointLineSegmentDistance(
+                    rhs[currentRightIndex],
+                    theSegmentA: lhs[currentLeftIndex],
+                    theSegmentB: lhs[nextLHSIndex]
+                )
+            )
+            
+            let crossProduct: Double = (lhs[nextLHSIndex].x - lhs[currentLeftIndex].x) * (rhs[nextRHSIndex].y - rhs[currentRightIndex].y) - (lhs[nextLHSIndex].y - lhs[currentLeftIndex].y) * (rhs[nextRHSIndex].x - rhs[currentRightIndex].x)
+            
+            if crossProduct > 0 {
+                currentLeftIndex = nextLHSIndex
+            } else {
+                if crossProduct < 0 {
+                    currentRightIndex = nextRHSIndex
+                } else {
+                    currentLeftIndex = nextLHSIndex
+                    currentRightIndex = nextRHSIndex
+                }
+            }
+            
+            iterationsCount += 1
+        }
+        
+        return sqrt(minDist)
+    }
 }
