@@ -86,7 +86,7 @@ extension Stroke {
                     result.append(adjustedNextPoint)
                     left = distance
                 }
-
+                
             }
         }
         
@@ -160,7 +160,7 @@ extension Stroke {
         return result
     }
     
-
+    
     func smooth() -> Stroke {
         guard self.count >= 3 else { return self }
         var smoothed: Stroke = .init()
@@ -196,16 +196,16 @@ extension Stroke {
         return acos(fixDomain(value: dotProduct / normProduct))
     }
     
-    func dominant(_ alpha: Double, _ stroke: Stroke) -> Stroke {
-        guard stroke.count > 2 else { return stroke }
+    func dominant(_ alpha: Double) -> Stroke {
+        guard self.count > 2 else { return self }
         
-        var result: Stroke = [stroke[0]]
+        var result: Stroke = [self[0]]
         
         var i = 1
-        while i < stroke.count - 1 {
-            let a = stroke[i - 1]
-            let b = stroke[i]
-            let c = stroke[i + 1]
+        while i < self.count - 1 {
+            let a = self[i - 1]
+            let b = self[i]
+            let c = self[i + 1]
             
             if angle(a, b, c) < alpha {
                 i += 1
@@ -215,11 +215,39 @@ extension Stroke {
             }
         }
         
-        result.append(stroke.last!)
+        result.append(self.last!)
         return result
     }
-
 }
 
 
+public extension Strokes {
+    func sanitize() -> Strokes {
+        var sanitized: Strokes = .init()
+        let alpha = 2 * Double.pi * 15 / 360.0;
+        
+        for i in 0..<self.count {
 
+            let processedStroke =
+                self[i]
+                    .unduplicate()
+                    .redistribute(10)
+                    .aspectRefit(
+                        in: .init(
+                            origin: .zero,
+                            size: .init(
+                                width: 1.0,
+                                height: 1.0
+                            )
+                        )
+                    )
+                    .smooth()
+                    .unduplicate()
+                    .dominant(alpha)
+            
+            sanitized.append(processedStroke)
+        }
+        
+        return Strokes(sanitized.prefix(10))
+    }
+}
