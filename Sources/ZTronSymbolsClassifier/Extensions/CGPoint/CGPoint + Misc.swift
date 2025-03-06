@@ -22,6 +22,11 @@ extension CGPoint {
     }
     
     
+    static func lerp(_ a: CGPoint, _ b: CGPoint, _ t: Double) -> CGPoint {
+        assert(t >= 0 && t <= 1)
+        return a + t*(b - a)
+    }
+    
     fileprivate static func minimumDistancePoint(_ thePoint: CGPoint, theSegmentA: CGPoint, theSegmentB: CGPoint) -> CGPoint {
         let scalar = (thePoint - theSegmentA).dot(theSegmentB - theSegmentA)/pow(theSegmentA.euclideanDistance(to: theSegmentB), 2.0)
         
@@ -69,5 +74,16 @@ extension CGPoint {
         }
         
         return concatenated
+    }
+}
+
+internal extension Stroke {
+    func toString() -> String {
+        var theString = "[\n"
+        for point in self {
+            theString += "(\(point.x), \(point.y)),\n"
+        }
+        theString += "]\n"
+        return theString
     }
 }

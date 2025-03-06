@@ -10,6 +10,7 @@ extension Stroke {
     /// - Complexity: Time: O(self.count)
     func boundingBox() -> CGRect {
         guard let first = self.first else { fatalError("Empty stroke has no bounding box") }
+        
         let mainDiagonal = self.reduce((first, first)) { (current, point) in
             let (minPoint, maxPoint) = current
             return (
@@ -61,42 +62,7 @@ extension Stroke {
         guard self.count > 1 else { return 0 }
         return zip(self, self.dropFirst()).reduce(0) { $0 + $1.0.euclideanDistance(to: $1.1) }
     }
-    
-    func redistribute(distance: Double) -> Stroke {
-        guard distance > 0 else { return [] }
-        guard self.count > 1 else { return self }
-        guard let firstPoint = self.first else { return [] }
         
-        var index = 1
-        var result = Stroke.init(arrayLiteral: firstPoint)
-        
-        var left = distance
-        
-        while index < self.count {
-            if let previousPoint = result.last {
-                let nextPoint = self[index]
-                let consecutivePointsDistance = previousPoint.euclideanDistance(to: nextPoint)
-                
-                if consecutivePointsDistance < left {
-                    left -= consecutivePointsDistance
-                    index += 1
-                } else {
-                    let ratio = left / consecutivePointsDistance
-                    let adjustedNextPoint = previousPoint + ratio * (nextPoint - previousPoint)
-                    result.append(adjustedNextPoint)
-                    left = distance
-                }
-                
-            }
-        }
-        
-        if let lastPoint = self.last {
-            result.append(lastPoint)
-        }
-        
-        return result
-    }
-    
     /// Redistribute the points along the stroke using linear interpolation to ensure that it's made of `num` points, approximately evenly spaced.
     ///
     /// - Complexity: O(self.count)
@@ -109,8 +75,8 @@ extension Stroke {
             }
         }
         
-        let dist = self.strokeLength() / Double(num - 1)
-        return self.redistribute(distance: dist)
+        let dist = self.strokeLength() / Double(num)
+        return self.redistribute(step: dist)
     }
     
     /// fit the first rect maximally and centered into the second rect keeping the aspect ratio
@@ -124,13 +90,13 @@ extension Stroke {
         
         let offset: CGPoint = sourceWider ? CGPoint(
             x: 0,
-            y: (target.height - scaleFactor * source.height)/2.0
+            y: (target.height - scaleFactor * source.height) / 2.0
         ) : CGPoint(
             x: (target.width - scaleFactor * source.width) / 2.0,
             y: 0
         )
-        
-        let newOrigin = scaleFactor * source.origin + offset + target.origin
+
+        let newOrigin = target.origin + offset
         return CGRect(
             origin: newOrigin,
             size: .init(
@@ -139,7 +105,6 @@ extension Stroke {
             )
         )
     }
-    
     
     func aspectRefit(in rect: CGRect) -> Stroke {
         return self.refit(self.aspectFit(source: self.boundingBox(), target: rect))
@@ -154,6 +119,9 @@ extension Stroke {
         for i in 1..<self.count {
             if self[i] /~ self[i - 1] {
                 result.append(self[i])
+                print("Adding non duplicate point \(self[i])")
+            } else {
+                print("Removing duplicate points \(self[i]) ~ \(self[i-1])")
             }
         }
         
@@ -181,11 +149,7 @@ extension Stroke {
         return smoothed
     }
     
-    
-    private func fixDomain(value: Double) -> Double {
-        return Swift.min(1.0, Swift.max(-1.0, value));
-    }
-    
+
     private func angle(_ x: CGPoint, _ y: CGPoint, _ z: CGPoint) -> Double {
         let v = CGPoint(x: y.x - x.x, y: y.y - x.y)
         let w = CGPoint(x: z.x - y.x, y: z.y - y.y)
@@ -193,9 +157,10 @@ extension Stroke {
         let dotProduct = v.dot(w)
         let normProduct = v.norm() * w.norm()
         
-        return acos(fixDomain(value: dotProduct / normProduct))
+        return acos((-1.0..<1.0).clamp(dotProduct / normProduct))
     }
     
+    /// Simplifies the stroke by removing points that don't significatively contribute to the shape of the stroke, based on an angle threshold.
     func dominant(_ alpha: Double) -> Stroke {
         guard self.count > 2 else { return self }
         
@@ -227,7 +192,6 @@ public extension Strokes {
         let alpha = 2 * Double.pi * 15 / 360.0;
         
         for i in 0..<self.count {
-
             let processedStroke =
                 self[i]
                     .unduplicate()

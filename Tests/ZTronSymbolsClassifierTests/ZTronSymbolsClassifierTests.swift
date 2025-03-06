@@ -2,6 +2,88 @@ import XCTest
 @testable import ZTronSymbolsClassifier
 import CoreGraphics
 
+fileprivate let redistributeTestStroke = [
+    [
+        CGPoint(x: -10.76, y: 16.17),
+        CGPoint(x: -11.46, y: 1.22),
+        CGPoint(x: -4, y: 1.12),
+        CGPoint(x: -6.28, y: 2.66),
+        CGPoint(x: 3.43, y: 3.1),
+        CGPoint(x: -7.3, y: 10.75),
+    ]
+]
+
+fileprivate let secondRandomStroke = [
+    [
+        CGPoint(x: 0.6015503639398619, y: 0.3428699082437242),
+        CGPoint(x: 0.6, y: 0.34197584688530264),
+        CGPoint(x: 0.5945736197538154, y: 0.3397407241841753),
+        CGPoint(x: 0.5798449494117914, y: 0.33527043785535177),
+        CGPoint(x: 0.5643410616142805, y: 0.3316942333482343),
+        CGPoint(x: 0.5550387360328851, y: 0.3294590901838225),
+        CGPoint(x: 0.543410829056141, y: 0.3276709879302638),
+        CGPoint(x: 0.5341085034747456, y: 0.3263299061242736),
+        CGPoint(x: 0.5201550151026526, y: 0.32498882431828346),
+        CGPoint(x: 0.5046511627906977, y: 0.32454178340743045),
+        CGPoint(x: 0.4891472749931868, y: 0.3240947629598619),
+        CGPoint(x: 0.47674418604651164, y: 0.3240947629598619),
+        CGPoint(x: 0.46511627906976744, y: 0.3240947629598619),
+        CGPoint(x: 0.4542635540629542, y: 0.325435844765852),
+        CGPoint(x: 0.4240309959234193, y: 0.3312471924373813),
+        CGPoint(x: 0.4131782709166061, y: 0.33392935604936164),
+        CGPoint(x: 0.4046511627906977, y: 0.33661151966134195),
+        CGPoint(x: 0.3806201313817224, y: 0.34510505140813597),
+        CGPoint(x: 0.36356587964434955, y: 0.3513634195272338),
+        CGPoint(x: 0.35348837209302325, y: 0.3562807263036259),
+        CGPoint(x: 0.34573641045148984, y: 0.3629861353335767),
+        CGPoint(x: 0.3372093023255814, y: 0.3714796466170863),
+        CGPoint(x: 0.3302325581395349, y: 0.38042019881144884),
+        CGPoint(x: 0.3224805964980014, y: 0.3983012827368896),
+        CGPoint(x: 0.3209302325581395, y: 0.40724183493125216),
+        CGPoint(x: 0.3209302325581395, y: 0.41528832576719316),
+        CGPoint(x: 0.3224805964980014, y: 0.4215467143495754),
+        CGPoint(x: 0.32713175928869914, y: 0.42735806202110466),
+        CGPoint(x: 0.33643408487009446, y: 0.4331694096926339),
+        CGPoint(x: 0.3775193680164426, y: 0.44747428911095716),
+        CGPoint(x: 0.4100775075513263, y: 0.45507375949932954),
+        CGPoint(x: 0.43488372093023253, y: 0.45909700491730004),
+        CGPoint(x: 0.4542635540629542, y: 0.4613321276184274),
+        CGPoint(x: 0.47519378662109374, y: 0.462226188976849),
+        CGPoint(x: 0.49767441860465117, y: 0.46312025033527054),
+        CGPoint(x: 0.5093023255813953, y: 0.46312025033527054),
+        CGPoint(x: 0.5108526895212573, y: 0.46312025033527054),
+        CGPoint(x: 0.5100775075513263, y: 0.46267320942441753),
+        CGPoint(x: 0.5093023255813953, y: 0.46267320942441753),
+        CGPoint(x: 0.5046511627906977, y: 0.46177916852928036),
+        CGPoint(x: 0.49689920114916425, y: 0.4608851071708588),
+        CGPoint(x: 0.48372093023255813, y: 0.4595440253648686),
+        CGPoint(x: 0.4620154802189317, y: 0.4582029435588785),
+        CGPoint(x: 0.443410829056141, y: 0.4582029435588785),
+        CGPoint(x: 0.42635657731876814, y: 0.45909700491730004),
+        CGPoint(x: 0.38217053080714025, y: 0.46714349575324104),
+        CGPoint(x: 0.3581395348837209, y: 0.47474294567832903),
+        CGPoint(x: 0.33333332150481465, y: 0.48591864103710336),
+        CGPoint(x: 0.30465116279069765, y: 0.499329459097005),
+        CGPoint(x: 0.27751936801644256, y: 0.5136343180520438),
+        CGPoint(x: 0.2558139534883721, y: 0.5283862179179356),
+        CGPoint(x: 0.21550385231195493, y: 0.5704067948144838),
+        CGPoint(x: 0.20542634476062863, y: 0.5909700423519049),
+        CGPoint(x: 0.20465116279069767, y: 0.6115332898893259),
+        CGPoint(x: 0.21627906976744185, y: 0.6329905987851686),
+        CGPoint(x: 0.22093023255813954, y: 0.6396960078151194),
+        CGPoint(x: 0.27829454998637354, y: 0.6741171143232951),
+        CGPoint(x: 0.4798449494117914, y: 0.7192668752793921),
+        CGPoint(x: 0.5465116279069767, y: 0.7210549775329509),
+        CGPoint(x: 0.600775181969931, y: 0.7152436298614216),
+        CGPoint(x: 0.6519379726676053, y: 0.6942333414131476),
+        CGPoint(x: 0.6589147168536519, y: 0.6826106256068047),
+        CGPoint(x: 0.6542635540629542, y: 0.6651765621289325),
+        CGPoint(x: 0.6503875732421875, y: 0.6602592758158249),
+        CGPoint(x: 0.6488372093023256, y: 0.6571300712929915),
+        CGPoint(x: 0.6488372093023256, y: 0.6562360303978544),
+        ]
+    ]
+
 fileprivate let randomStoke = [
     [
         CGPoint(x: 0.20232171205738883, y: 0.297323600973236),
@@ -256,6 +338,146 @@ final class SomeTest: XCTestCase {
                     XCTAssertEqual(lastPointInStroke.x, lastRedistributedPoint.x)
                     XCTAssertEqual(lastPointInStroke.y, lastRedistributedPoint.y)
                 }
+            }
+        }
+    }
+    
+    @MainActor func test_prop_smooth_preserves_count() throws {
+        for stroke in randomStoke {
+            let smoothed = stroke.smooth()
+            XCTAssertEqual(smoothed.count, stroke.count)
+            XCTAssertEqual(smoothed.first, stroke.first)
+            XCTAssertEqual(smoothed.last, stroke.last)
+        }
+    }
+    
+    @MainActor func test_stroke_refit() throws {
+        let refitted = randomStoke.map { stroke in
+            return stroke.refit(.init(origin: .zero, size: .init(width: 1.0, height: 1.0)))
+        }
+        
+        for stroke in refitted {
+            for point in stroke {
+                XCTAssert(point.x >= 0 && point.x <= 1)
+                XCTAssert(point.y >= 0 && point.y <= 1)
+            }
+        }
+    }
+    
+    @MainActor func test_vector_norm() throws {
+        let x: Double = Double.random(in: 0...1)
+        let y: Double = Double.random(in: 0...1)
+        
+        let someRandomPoint = CGPoint(x: x, y: y)
+        
+        let estimatedNorm = sqrt(x*x + y*y)
+        XCTAssertEqual(estimatedNorm, someRandomPoint.norm())
+    }
+    
+    @MainActor func test_vector_operations() throws {
+        let x1: Double = Double.random(in: 0...1)
+        let y1: Double = Double.random(in: 0...1)
+        
+        let x2: Double = Double.random(in: 0...1)
+        let y2: Double = Double.random(in: 0...1)
+        
+        let someV1 = CGPoint(x: x1, y: y1)
+        let someV2 = CGPoint(x: x2, y: y2)
+        
+        let totalLength: Double = randomStoke.first!.strokeLength() / 9.0
+        let left: Double = totalLength / 2.0
+        
+        let someRandomPoint = randomStoke.first!.randomElement()!
+        
+        let dir = someV2 - someV1
+        
+        let previousPoint = CGPoint(
+            x: totalLength/left * dir.x + someRandomPoint.x,
+            y: totalLength/left * dir.y + someRandomPoint.y
+        )
+        
+        XCTAssertEqual((dir + previousPoint).x, dir.x + previousPoint.x)
+        XCTAssertEqual((dir + previousPoint).y, dir.y + previousPoint.y)
+        
+        XCTAssertEqual((left * dir).x, left * dir.x)
+        XCTAssertEqual((left * dir).y, left * dir.y)
+        
+        XCTAssertEqual(previousPoint.x, (((totalLength/left) * dir) + someRandomPoint).x)
+        XCTAssertEqual(previousPoint.y, (((totalLength/left) * dir) + someRandomPoint).y)
+    }
+    
+    @MainActor func test_stroke_aspectFit() throws {
+        let refitted = randomStoke.map { stroke in
+            let boundingBox = stroke.boundingBox()
+            print("REFITTING \(boundingBox)")
+            return stroke.aspectFit(source: stroke.boundingBox(), target: .init(origin: .zero, size: .init(width: 1.0, height: 1.0)))
+        }
+        
+        for boundingBox in refitted {
+            assert(boundingBox.origin.x >= 0 && boundingBox.origin.x <= 1)
+            assert(boundingBox.origin.y >= 0 && boundingBox.origin.y <= 1)
+            assert(boundingBox.width >= 0 && boundingBox.width <= 1)
+            assert(boundingBox.height >= 0 && boundingBox.height <= 1)
+        }
+    }
+    
+    @MainActor func test_stroke_aspectRefit() throws {
+        let refitted = randomStoke.map { stroke in
+            return stroke.aspectRefit(in: .init(origin: .zero, size: .init(width: 1.0, height: 1.0)))
+        }
+        
+        for stroke in refitted {
+            for point in stroke {
+                assert(point.x >= 0 && point.x <= 1)
+                assert(point.y >= 0 && point.y <= 1)
+            }
+        }
+    }
+    
+    @MainActor func test_stroke_length() throws {
+        for stroke in redistributeTestStroke {
+            var theLength = 0.0
+            for i in 0..<stroke.count-1 {
+                theLength += sqrt((stroke[i+1].x - stroke[i].x)*(stroke[i+1].x - stroke[i].x) + (stroke[i+1].y - stroke[i].y)*(stroke[i+1].y - stroke[i].y))
+            }
+            
+            XCTAssertEqual(theLength, stroke.strokeLength())
+            print(theLength, stroke.strokeLength())
+        }
+    }
+    
+    @MainActor func test_stroke_redistribute() throws {
+        for stroke in secondRandomStroke {
+            print(stroke.toString())
+            
+            let redistributed = stroke.redistribute(step: stroke.strokeLength() / 9.0)
+            let redistributedAlt = stroke.redistribute(9)
+            
+            print(redistributed.toString())
+                    
+            XCTAssertEqual(redistributed.count, 9)
+            XCTAssertEqual(redistributedAlt.count, 9)
+        }
+    }
+    
+    @MainActor func testNormalizedDistances() throws {
+        for stroke in redistributeTestStroke {
+            let normalized = stroke.normalizedDistances()
+            XCTAssertEqual(normalized.first, 0)
+            XCTAssertEqual(normalized.last, 1)
+            XCTAssertEqual(normalized.count, stroke.count)
+        }
+    }
+    
+    @MainActor func test_stroke_sanification() throws {
+        let sanitised = randomStoke.sanitize()
+        
+        for stroke in sanitised {
+            XCTAssertLessThanOrEqual(stroke.count, 10)
+            
+            for point in stroke {
+                assert(point.x >= 0 && point.x <= 1)
+                assert(point.y >= 0 && point.y <= 1)
             }
         }
     }

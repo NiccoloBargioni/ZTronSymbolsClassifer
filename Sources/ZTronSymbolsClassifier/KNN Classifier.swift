@@ -5,13 +5,8 @@ protocol Sample {
     func distanceLowerBound(_ a: any Sample, _ b: any Sample) -> Double
 }
 
-struct Hit {
-    let samplescore: Double
-    let sample: any Sample
-}
-
-struct Score: Comparable {
-    let identifier: String
+struct Score<ID: Hashable>: Comparable {
+    let identifier: ID
     let score: Double
     
     static func < (lhs: Score, rhs: Score) -> Bool {
@@ -19,19 +14,19 @@ struct Score: Comparable {
     }
 }
 
-class SampleEntry {
-    let identifier: String
+class SampleEntry<ID: Hashable> {
+    let identifier: ID
     var samples: [any Sample]
     
-    init(identifier: String, sample: any Sample) {
+    init(identifier: ID, sample: any Sample) {
         self.identifier = identifier
         self.samples = [sample]
     }
 }
 
-class Classifier {
+class Classifier<ID: Hashable> {
     let samplelimit: Int
-    private var entries: [SampleEntry]
+    private var entries: [SampleEntry<ID>]
     private let lock = DispatchQueue(label: "classifier.lock")
     
     init(samplelimit: Int) {
@@ -39,7 +34,7 @@ class Classifier {
         self.entries = []
     }
     
-    func train(identifier: String, sample: any Sample) {
+    func train(identifier: ID, sample: any Sample) {
         lock.sync {
             if let entry = entries.first(where: { $0.identifier == identifier }) {
                 if entry.samples.count < samplelimit {
@@ -55,9 +50,9 @@ class Classifier {
         }
     }
     
-    func classify(sampleType: any Sample, unknown: any Sample) -> [Score] {
+    func classify(sampleType: any Sample, unknown: any Sample) -> [Score<ID>] {
         return lock.sync {
-            var results: [Score] = []
+            var results: [Score<ID>] = []
             
             for entry in entries {
                 let distances = entry.samples.map { sampleType.distance(unknown, $0) }.sorted()
