@@ -80,6 +80,111 @@ fileprivate let A3 = [
     ],
 ]
 
+fileprivate let A4 = [
+    [
+    CGPoint(x: 0.30465116279069765, y: 0.514975399858034),
+    CGPoint(x: 0.30775192615597746, y: 0.5136343180520438),
+    CGPoint(x: 0.3131782709166061, y: 0.5122932362460537),
+    CGPoint(x: 0.31472867034202395, y: 0.5118462157984851),
+    CGPoint(x: 0.3217054145280705, y: 0.5113991953509165),
+    CGPoint(x: 0.329457340684048, y: 0.5109521544400635),
+    CGPoint(x: 0.33643408487009446, y: 0.5113991953509165),
+    CGPoint(x: 0.3403100656908612, y: 0.5113991953509165),
+    CGPoint(x: 0.3441860465116279, y: 0.5118462157984851),
+    CGPoint(x: 0.34806199184683867, y: 0.5122932362460537),
+    CGPoint(x: 0.3496123912722565, y: 0.5127402771569066),
+    CGPoint(x: 0.35193797266760535, y: 0.5158694612164556),
+    CGPoint(x: 0.35271315463753633, y: 0.5181046043808674),
+    CGPoint(x: 0.35271315463753633, y: 0.5203397270819947),
+    CGPoint(x: 0.35271315463753633, y: 0.523468931604828),
+    CGPoint(x: 0.3511627906976744, y: 0.5283862179179356),
+    CGPoint(x: 0.3496123912722565, y: 0.5346446065003179),
+    CGPoint(x: 0.3472868098769077, y: 0.5413500155302687),
+    CGPoint(x: 0.343410829056141, y: 0.5485024450077881),
+    CGPoint(x: 0.3395348837209302, y: 0.555207854037739),
+    CGPoint(x: 0.33565890290016354, y: 0.5619132630676898),
+    CGPoint(x: 0.3317829220793968, y: 0.5686186720976406),
+    CGPoint(x: 0.329457340684048, y: 0.5735359788740327),
+    CGPoint(x: 0.32558139534883723, y: 0.5789003060979934),
+    CGPoint(x: 0.3217054145280705, y: 0.5847116537695226),
+    CGPoint(x: 0.31782943370730377, y: 0.5909700423519049),
+    CGPoint(x: 0.31550385231195494, y: 0.5967813900234341),
+    CGPoint(x: 0.313953488372093, y: 0.6021457172473947),
+    CGPoint(x: 0.313953488372093, y: 0.6070630240237869),
+    CGPoint(x: 0.31550385231195494, y: 0.6097451876357671),
+    CGPoint(x: 0.31627906976744186, y: 0.6106392489941888),
+    CGPoint(x: 0.31705425173737284, y: 0.6110862694417574),
+    CGPoint(x: 0.31937983313272167, y: 0.6110862694417574),
+    CGPoint(x: 0.32790697674418606, y: 0.6101922080833357),
+    CGPoint(x: 0.33565890290016354, y: 0.608404105829777),
+    CGPoint(x: 0.34186046511627904, y: 0.6066160035762183),
+    CGPoint(x: 0.3496123912722565, y: 0.6043808604118065),
+    CGPoint(x: 0.35271315463753633, y: 0.603486799053385),
+    CGPoint(x: 0.35658913545830306, y: 0.6025927581582478),
+    ],
+    [
+    CGPoint(x: 0.39147285638853563, y: 0.5131872976044752),
+    CGPoint(x: 0.39224803835846656, y: 0.5127402771569066),
+    CGPoint(x: 0.3930232558139535, y: 0.5122932362460537),
+    CGPoint(x: 0.3945736197538154, y: 0.5113991953509165),
+    CGPoint(x: 0.39767441860465114, y: 0.5109521544400635),
+    CGPoint(x: 0.3992247825445131, y: 0.5105051339924949),
+    CGPoint(x: 0.4, y: 0.5105051339924949),
+    CGPoint(x: 0.4031007633652798, y: 0.5109521544400635),
+    CGPoint(x: 0.4062015267305596, y: 0.5109521544400635),
+    CGPoint(x: 0.4100775075513263, y: 0.5113991953509165),
+    CGPoint(x: 0.41085268952125725, y: 0.5113991953509165),
+    CGPoint(x: 0.414728670342024, y: 0.5127402771569066),
+    CGPoint(x: 0.41937983313272165, y: 0.5145283794104654),
+    CGPoint(x: 0.42248059649800146, y: 0.515422440768887),
+    CGPoint(x: 0.4232558139534884, y: 0.5158694612164556),
+    CGPoint(x: 0.4232558139534884, y: 0.5167635225748771),
+    CGPoint(x: 0.4240309959234193, y: 0.5181046043808674),
+    CGPoint(x: 0.4240309959234193, y: 0.5194456861868575),
+    CGPoint(x: 0.4240309959234193, y: 0.5212337884404162),
+    CGPoint(x: 0.4240309959234193, y: 0.523468931604828),
+    CGPoint(x: 0.4240309959234193, y: 0.5261510952168084),
+    CGPoint(x: 0.4240309959234193, y: 0.5292802792763572),
+    CGPoint(x: 0.4232558139534884, y: 0.5319624428883376),
+    CGPoint(x: 0.42248059649800146, y: 0.5346446065003179),
+    CGPoint(x: 0.42248059649800146, y: 0.5373267701122982),
+    CGPoint(x: 0.4217054145280705, y: 0.5400089337242786),
+    CGPoint(x: 0.42093023255813955, y: 0.5426910973362589),
+    CGPoint(x: 0.41937983313272165, y: 0.5458202813958078),
+    CGPoint(x: 0.4178294337073038, y: 0.5485024450077881),
+    CGPoint(x: 0.41627906976744183, y: 0.5507375881721999),
+    CGPoint(x: 0.414728670342024, y: 0.5529727313366116),
+    CGPoint(x: 0.413953488372093, y: 0.555207854037739),
+    CGPoint(x: 0.41240308894667516, y: 0.5574429972021507),
+    CGPoint(x: 0.4100775075513263, y: 0.5596781403665625),
+    CGPoint(x: 0.4085271081259084, y: 0.5619132630676898),
+    CGPoint(x: 0.4062015267305596, y: 0.5641484062321015),
+    CGPoint(x: 0.4046511627906977, y: 0.5663835493965133),
+    CGPoint(x: 0.40232558139534885, y: 0.5686186720976406),
+    CGPoint(x: 0.3992247825445131, y: 0.571747876620474),
+    CGPoint(x: 0.3953488372093023, y: 0.5757711220384444),
+    CGPoint(x: 0.39224803835846656, y: 0.5797943674564149),
+    CGPoint(x: 0.3899224569631177, y: 0.584264633321954),
+    CGPoint(x: 0.3883720930232558, y: 0.5878408582923559),
+    CGPoint(x: 0.3883720930232558, y: 0.5914170627994735),
+    CGPoint(x: 0.3883720930232558, y: 0.5949932877698754),
+    CGPoint(x: 0.38914727499318674, y: 0.5976754513818556),
+    CGPoint(x: 0.3899224569631177, y: 0.6008046354414046),
+    CGPoint(x: 0.39224803835846656, y: 0.6025927581582478),
+    CGPoint(x: 0.3930232558139535, y: 0.603486799053385),
+    CGPoint(x: 0.3945736197538154, y: 0.6039338399642379),
+    CGPoint(x: 0.3953488372093023, y: 0.6039338399642379),
+    CGPoint(x: 0.3953488372093023, y: 0.6043808604118065),
+    CGPoint(x: 0.39767441860465114, y: 0.6043808604118065),
+    CGPoint(x: 0.3992247825445131, y: 0.6048278808593751),
+    CGPoint(x: 0.40387594533521076, y: 0.6043808604118065),
+    CGPoint(x: 0.4100775075513263, y: 0.603486799053385),
+    CGPoint(x: 0.4170542517373728, y: 0.6025927581582478),
+    CGPoint(x: 0.41860465116279066, y: 0.6021457172473947),
+    CGPoint(x: 0.42015501510265263, y: 0.6021457172473947),
+    ],
+]
+
 fileprivate let N1 = [
     [
         CGPoint(x: 0.0, y: 0.7141763022072605),
@@ -147,6 +252,60 @@ fileprivate let N3 = [
     ]
 ]
 
+fileprivate let S1 = [
+    [
+        CGPoint(x: 0.2986073527268863, y: 0.047760893057054075),
+        CGPoint(x: 0.4335072492195365, y: 0.04475520625456688),
+        CGPoint(x: 0.5219730820785085, y: 0.11021515173141223),
+        CGPoint(x: 0.5518132445956326, y: 0.24324676347044302),
+        CGPoint(x: 0.4992894766828891, y: 0.8573298793647508),
+        CGPoint(x: 0.574872592128977, y: 0.9541664395374263),
+        CGPoint(x: 0.7013926472731137, y: 1.0),
+    ],
+    [
+        CGPoint(x: 0.0, y: 0.5953306915164109),
+        CGPoint(x: 0.7145942771697614, y: 0.719756579325613),
+        CGPoint(x: 0.8707655867727264, y: 0.6395582503181891),
+        CGPoint(x: 0.9578606676564979, y: 0.5001055427953709),
+        CGPoint(x: 0.9294745882370236, y: 0.3664117301886782),
+        CGPoint(x: 0.8014540878495562, y: 0.2790533752497177),
+        CGPoint(x: 0.6159384988375977, y: 0.24866497408042343),
+    ]
+]
+
+fileprivate let S2 = [
+    [
+        CGPoint(x: 0.2787257407619371, y: 0.06436766315336577),
+        CGPoint(x: 0.39170469838015326, y: 0.05804995927940617),
+        CGPoint(x: 0.45924943462756884, y: 0.12493287278177227),
+        CGPoint(x: 0.5477444023434622, y: 0.8695627259183266),
+        CGPoint(x: 0.627061403188332, y: 0.9584844334810957),
+        CGPoint(x: 0.721274259238063, y: 0.9979282850983494),
+    ],
+
+    [
+        CGPoint(x: 0.0, y: 0.36439803886776306),
+        CGPoint(x: 1.0, y: 0.635601961132237),
+    ]
+]
+
+fileprivate let S3 = [
+    [
+        CGPoint(x: 0.2717237517627217, y: 0.0),
+        CGPoint(x: 0.37970473277410627, y: 0.04702500559657871),
+        CGPoint(x: 0.4380284882884482, y: 0.14445965619223178),
+        CGPoint(x: 0.45143569230883696, y: 0.7463442287483525),
+        CGPoint(x: 0.5126356292170757, y: 0.8805552623365336),
+        CGPoint(x: 0.6079585314809137, y: 0.9483919264780085),
+        CGPoint(x: 0.7282762482372784, y: 0.9524702826773813),
+    ],
+
+    [
+        CGPoint(x: 0.0, y: 0.31279898052778743),
+        CGPoint(x: 1.0, y: 0.6441662695192805),
+    ]
+]
+
 fileprivate extension CGRect {
     static func isValidBox(originX: CGFloat, originY: CGFloat, bottomTrailingX: CGFloat, bottomTrailingY: CGFloat) -> Bool {
         return originX < bottomTrailingX && originY < bottomTrailingY
@@ -204,8 +363,8 @@ final class SomeTest: XCTestCase {
             XCTAssertEqual(refitted.count, stroke.count)
             
             for i in 0..<refitted.count {
-                XCTAssertEqual(refitted[i].x, stroke[i].x)
-                XCTAssertEqual(refitted[i].y, stroke[i].y)
+                XCTAssertEqual(refitted[i].x, stroke[i].x, accuracy: sqrt(1.0.ulp))
+                XCTAssertEqual(refitted[i].y, stroke[i].y, accuracy: sqrt(1.0.ulp))
             }
         }
     }
@@ -334,7 +493,7 @@ final class SomeTest: XCTestCase {
     @MainActor func test_stroke_aspectFit() throws {
         let refitted = A1.map { stroke in
             let boundingBox = stroke.boundingBox()
-            return stroke.aspectFit(source: stroke.boundingBox(), target: .init(origin: .zero, size: .init(width: 1.0, height: 1.0)))
+            return stroke.aspectFit(source: boundingBox, target: .init(origin: .zero, size: .init(width: 1.0, height: 1.0)))
         }
         
         for boundingBox in refitted {
@@ -389,7 +548,7 @@ final class SomeTest: XCTestCase {
     }
     
     @MainActor func test_stroke_sanification() throws {
-        let sanitised = N3.sanitize()
+        let sanitised = S3.sanitize()
         
         for stroke in sanitised {
             XCTAssertLessThanOrEqual(stroke.count, 10)
@@ -406,12 +565,17 @@ final class SomeTest: XCTestCase {
     @MainActor func test_classifier_training() throws {
         let alphabetClassifier = Classifier<Alphabet>(samplelimit: Int.max - 1)
         
-        let test = StrokeSample(strokes: A2)
+        let test = StrokeSample(strokes: S1)
         
         alphabetClassifier.train(identifier: .A, sample: StrokeSample(strokes: A1))
+        alphabetClassifier.train(identifier: .A, sample: StrokeSample(strokes: A2))
         alphabetClassifier.train(identifier: .A, sample: StrokeSample(strokes: A3))
         alphabetClassifier.train(identifier: .N, sample: StrokeSample(strokes: N1))
+        alphabetClassifier.train(identifier: .N, sample: StrokeSample(strokes: N2))
         alphabetClassifier.train(identifier: .N, sample: StrokeSample(strokes: N3))
+        alphabetClassifier.train(identifier: .S, sample: StrokeSample(strokes: S1))
+        alphabetClassifier.train(identifier: .S, sample: StrokeSample(strokes: S2))
+        alphabetClassifier.train(identifier: .S, sample: StrokeSample(strokes: S3))
         
         let result = alphabetClassifier.classify(sampleType: StrokeSample.self, unknown: test)
         

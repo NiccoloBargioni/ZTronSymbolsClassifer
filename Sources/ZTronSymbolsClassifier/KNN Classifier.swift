@@ -1,15 +1,20 @@
 import Foundation
 
-protocol Sample {
+public protocol Sample {
     static func distance(_ a: any Sample, _ b: any Sample) -> Double
     static func distanceLowerBound(_ a: any Sample, _ b: any Sample) -> Double
 }
 
-struct Score<ID: Hashable>: Comparable {
+public struct Score<ID: Hashable>: Comparable {
     let identifier: ID
     let score: Double
     
-    static func < (lhs: Score, rhs: Score) -> Bool {
+    public init(identifier: ID, score: Double) {
+        self.identifier = identifier
+        self.score = score
+    }
+    
+    public static func < (lhs: Score, rhs: Score) -> Bool {
         return lhs.score < rhs.score
     }
 }
@@ -24,17 +29,17 @@ class SampleEntry<ID: Hashable> {
     }
 }
 
-class Classifier<ID: Hashable> {
+public final class Classifier<ID: Hashable> {
     let samplelimit: Int
     private var entries: [SampleEntry<ID>]
     private let lock = DispatchQueue(label: "classifier.lock")
     
-    init(samplelimit: Int) {
+    public init(samplelimit: Int) {
         self.samplelimit = samplelimit
         self.entries = []
     }
     
-    func train(identifier: ID, sample: any Sample) {
+    public func train(identifier: ID, sample: any Sample) {
         lock.sync {
             if let entry = entries.first(where: { $0.identifier == identifier }) {
                 if entry.samples.count < samplelimit {
@@ -50,7 +55,7 @@ class Classifier<ID: Hashable> {
         }
     }
     
-    func classify<T: Sample>(sampleType: T.Type, unknown: any Sample) -> [Score<ID>] {
+    public func classify<T: Sample>(sampleType: T.Type, unknown: any Sample) -> [Score<ID>] {
         return lock.sync {
             var results: [Score<ID>] = []
             
