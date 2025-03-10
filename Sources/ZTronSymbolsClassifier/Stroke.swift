@@ -49,13 +49,42 @@ extension Stroke {
         let targetWidth = rect.bottomRight().x - rect.origin.x
         let targetHeight = rect.bottomRight().y - rect.origin.y
         
-        let scaleX = bbWidth == 0 ? 1 : targetWidth / bbWidth
-        let scaleY = bbHeight == 0 ? 1 : targetHeight / bbHeight
+        let scaleX = bbWidth == 0 ? 1.0 : targetWidth / bbWidth
+        let scaleY = bbHeight == 0 ? 1.0 : targetHeight / bbHeight
         let transX = bbWidth == 0 ? rect.origin.x + 0.5 * targetWidth : rect.origin.x
         let transY = bbHeight == 0 ? rect.origin.y + 0.5 * targetHeight : rect.origin.y
         
         return self.map { (CGPoint(x: scaleX * ($0.x - bbMin.x), y: scaleY * ($0.y - bbMin.y))) + CGPoint(x: transX, y: transY) }
     }
+    
+    /*
+     -- fit into rect (x1, y1, x2, y2)
+     refit :: Rect -> Stroke -> Stroke
+     refit (Point (x1, y1), Point (x2, y2)) _ | x1 > x2 || y1 > y2 = error "Dude! Your rect doesn't make sense!"
+     refit _ [] = []
+     refit (Point (x1, y1), Point (x2, y2)) stroke = for stroke $ \p -> (scale scaleX scaleY (p `sub` reset)) `add` trans
+       where
+         (Point (bbx1, bby1), Point (bbx2, bby2)) = boundingbox stroke
+         reset = Point (bbx1, bby1)
+         bbWidth = bbx2 - bbx1
+         bbHeight = bby2 - bby1
+         targetWidth = x2 - x1
+         targetHeight = y2 - y1
+         scaleX = case bbWidth of
+           0 -> 1
+           width -> 1/width * targetWidth
+         scaleY = case bbHeight of
+           0 -> 1
+           height -> 1/height * targetHeight
+         transX = case bbWidth of
+           0 -> x1 + 1/2 * targetWidth
+           width -> x1
+         transY = case bbHeight of
+           0 -> y1 + 1/2 * targetHeight
+           height -> y1
+         trans = Point (transX, transY)
+
+     */
     
     /// Computes the total stroke length, defined as the sum of the length of vectors joining two consecutive points in the stroke. A stroke that contains less than two points is defined to be of length zero.
     func strokeLength() -> Double {
@@ -63,7 +92,7 @@ extension Stroke {
         return zip(self, self.dropFirst()).reduce(0) { $0 + $1.0.euclideanDistance(to: $1.1) }
     }
         
-    /// Redistribute the points along the stroke using linear interpolation to ensure that it's made of `num` points, approximately evenly spaced.
+    /// Redistribute the points along the stroke using linear interpolation to ensure that it's made of `num` points, approximately evenly spaced, in a way that it preserves the stroke's first and last point.
     ///
     /// - Complexity: O(self.count)
     func redistribute(_ num: Int) -> Stroke {
@@ -119,9 +148,6 @@ extension Stroke {
         for i in 1..<self.count {
             if self[i] /~ self[i - 1] {
                 result.append(self[i])
-                print("Adding non duplicate point \(self[i])")
-            } else {
-                print("Removing duplicate points \(self[i]) ~ \(self[i-1])")
             }
         }
         

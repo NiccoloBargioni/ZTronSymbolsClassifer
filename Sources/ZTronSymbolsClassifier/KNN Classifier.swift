@@ -1,8 +1,8 @@
 import Foundation
 
 protocol Sample {
-    func distance(_ a: any Sample, _ b: any Sample) -> Double
-    func distanceLowerBound(_ a: any Sample, _ b: any Sample) -> Double
+    static func distance(_ a: any Sample, _ b: any Sample) -> Double
+    static func distanceLowerBound(_ a: any Sample, _ b: any Sample) -> Double
 }
 
 struct Score<ID: Hashable>: Comparable {
@@ -50,12 +50,12 @@ class Classifier<ID: Hashable> {
         }
     }
     
-    func classify(sampleType: any Sample, unknown: any Sample) -> [Score<ID>] {
+    func classify<T: Sample>(sampleType: T.Type, unknown: any Sample) -> [Score<ID>] {
         return lock.sync {
             var results: [Score<ID>] = []
             
             for entry in entries {
-                let distances = entry.samples.map { sampleType.distance(unknown, $0) }.sorted()
+                let distances = entry.samples.map { T.distance(unknown, $0) }.sorted()
                 let meanMin = distances.prefix(2).reduce(0, +) / Double(min(2, distances.count))
                 results.append(Score(identifier: entry.identifier, score: meanMin))
             }

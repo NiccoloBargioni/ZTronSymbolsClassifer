@@ -26,7 +26,7 @@ public final class StrokeSample: Sample {
     }
     
     
-    func distance(_ a: any Sample, _ b: any Sample) -> Double {
+    static func distance(_ a: any Sample, _ b: any Sample) -> Double {
         guard let lhsStroke = a as? StrokeSample else { fatalError("Expected first parameter of type \(String(describing: StrokeSample.self)). \(type(of: a)) found instead.") }
         guard let rhsStroke = b as? StrokeSample else { fatalError("Expected first parameter of type \(String(describing: StrokeSample.self)). \(type(of: b)) found instead.") }
         
@@ -38,7 +38,7 @@ public final class StrokeSample: Sample {
         }
     }
     
-    func distanceLowerBound(_ a: any Sample, _ b: any Sample) -> Double {
+    static func distanceLowerBound(_ a: any Sample, _ b: any Sample) -> Double {
         guard let lhsStroke = a as? StrokeSample else { fatalError("Expected first parameter of type \(String(describing: StrokeSample.self)). \(type(of: a)) found instead.") }
         guard let rhsStroke = b as? StrokeSample else { fatalError("Expected first parameter of type \(String(describing: StrokeSample.self)). \(type(of: b)) found instead.") }
 

@@ -46,6 +46,9 @@ internal extension Stroke {
         return CGPoint.lerp(self[index], self[index+1], t)
     }
     
+    /// Redistributes the points in a way that consecutive points are approximately `step` distant along the stroke.
+    ///
+    /// - Parameter step: The target distance along the stroke between two consecutive points in the output.
     func redistribute(step: Double) -> Stroke {
         let newCount = Int(round(self.strokeLength() / step))
         

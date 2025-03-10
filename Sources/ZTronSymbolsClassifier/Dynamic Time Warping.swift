@@ -1,5 +1,6 @@
 import Foundation
 
+// TODO: CAN VASTLY IMPROVE EFFICIENCY TURNING MATRICES INTO 1D ARRAY WITH PROPER INDEX MANAGEMENT
 public class DTW {
     public init() { }
     
