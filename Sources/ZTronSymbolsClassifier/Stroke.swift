@@ -57,35 +57,6 @@ extension Stroke {
         return self.map { (CGPoint(x: scaleX * ($0.x - bbMin.x), y: scaleY * ($0.y - bbMin.y))) + CGPoint(x: transX, y: transY) }
     }
     
-    /*
-     -- fit into rect (x1, y1, x2, y2)
-     refit :: Rect -> Stroke -> Stroke
-     refit (Point (x1, y1), Point (x2, y2)) _ | x1 > x2 || y1 > y2 = error "Dude! Your rect doesn't make sense!"
-     refit _ [] = []
-     refit (Point (x1, y1), Point (x2, y2)) stroke = for stroke $ \p -> (scale scaleX scaleY (p `sub` reset)) `add` trans
-       where
-         (Point (bbx1, bby1), Point (bbx2, bby2)) = boundingbox stroke
-         reset = Point (bbx1, bby1)
-         bbWidth = bbx2 - bbx1
-         bbHeight = bby2 - bby1
-         targetWidth = x2 - x1
-         targetHeight = y2 - y1
-         scaleX = case bbWidth of
-           0 -> 1
-           width -> 1/width * targetWidth
-         scaleY = case bbHeight of
-           0 -> 1
-           height -> 1/height * targetHeight
-         transX = case bbWidth of
-           0 -> x1 + 1/2 * targetWidth
-           width -> x1
-         transY = case bbHeight of
-           0 -> y1 + 1/2 * targetHeight
-           height -> y1
-         trans = Point (transX, transY)
-
-     */
-    
     /// Computes the total stroke length, defined as the sum of the length of vectors joining two consecutive points in the stroke. A stroke that contains less than two points is defined to be of length zero.
     func strokeLength() -> Double {
         guard self.count > 1 else { return 0 }

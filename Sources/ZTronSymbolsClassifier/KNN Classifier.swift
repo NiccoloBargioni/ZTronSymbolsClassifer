@@ -6,8 +6,8 @@ public protocol Sample {
 }
 
 public struct Score<ID: Hashable>: Comparable {
-    let identifier: ID
-    let score: Double
+    public let identifier: ID
+    public let score: Double
     
     public init(identifier: ID, score: Double) {
         self.identifier = identifier
