@@ -86,4 +86,13 @@ internal extension Stroke {
         theString += "]\n"
         return theString
     }
+    
+    func toCGString() -> String {
+        var theString = "[\n"
+        for point in self {
+            theString += "CGPoint(x: \(point.x), y: \(point.y)),\n"
+        }
+        theString += "]\n"
+        return theString
+    }
 }
